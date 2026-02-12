@@ -104,12 +104,12 @@ char* divide_strings(const char* dividend, const char* divisor)
 {
     if (divisor[0] == '0')
     {
-        printf("Ошибка: деление на ноль!\n"); return NULL;
+        printf("Error: division by zero!\n"); return NULL;
     }
 
     if (compare_strings(dividend, divisor) < 0)
     {
-        printf("Делимое меньше делителя.\n"); return NULL;
+        printf("The divisible is less than the divisor.\n"); return NULL;
     }
 
     int dividend_len = strlen(dividend);
@@ -270,24 +270,24 @@ int main()
     char num1[MAX_LEN], num2[MAX_LEN];
     int choice;
 
-    printf("Калькулятор длинных целых чисел\n\n");
-    printf("Первое число: "); scanf("%s", num1);
+    printf("Long Integer Calculator\n\n");
+    printf("First number: "); scanf("%s", num1);
     if (!is_valid_num(num1))
     {
         printf("Error!\n"); return 0;
     }
 
-    printf("Второе число: "); scanf("%s", num2);
+    printf("Second number: "); scanf("%s", num2);
     if (!is_valid_num(num2))
     {
-        printf("Ошибка!\n"); return 0;
+        printf("Error!\n"); return 0;
     }
 
-    printf("\n1. Сложение\n2. Вычитание\n3. Умножение\n4. Деление\n5. Выход\nВыбор: ");
+    printf("\n1. Addition\n2. Subtraction\n3. Multiplication\n4. Division\n5. Exit\nChoice: ");
     scanf("%d", &choice);
     if (choice == 5)
     {
-        printf("Выход\n"); return 0;
+        printf("Exitn"); return 0;
     }
 
     char* result = NULL;
@@ -310,12 +310,12 @@ int main()
         }
         break;
     }
-    default: printf("Неверный выбор\n"); return 0;
+    default: printf("Wrong choice\n"); return 0;
     }
 
     if (result)
     {
-        printf("\nРезультат: %s\n", result);
+        printf("\nResult: %s\n", result);
         free(result);
     }
 
