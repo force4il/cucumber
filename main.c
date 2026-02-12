@@ -274,7 +274,7 @@ int main()
     printf("Первое число: "); scanf("%s", num1);
     if (!is_valid_num(num1))
     {
-        printf("Ошибка!\n"); return 0;
+        printf("Error!\n"); return 0;
     }
 
     printf("Второе число: "); scanf("%s", num2);
