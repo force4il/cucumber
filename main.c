@@ -265,7 +265,7 @@ int is_valid_num(const char* num)
     return 1;
 }
 
-int main()
+int play_func()
 {
     char num1[MAX_LEN], num2[MAX_LEN];
     int choice;
@@ -318,8 +318,6 @@ int main()
         printf("\nResult: %s\n", result);
         free(result);
     }
-
-    return 0;
 }
 
 
