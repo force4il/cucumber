@@ -6,7 +6,7 @@
 using std::chrono::high_resolution_clock;
 using std::chrono::time_point;
 using std::chrono::nanoseconds;
-
+using std::chrono::duration_cast;
 
 // Вставка для структур на основе массива
 template <typename ArrType>
