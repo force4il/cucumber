@@ -19,14 +19,14 @@ set(PROJECT_SOURCES
         mainwindow.ui
         loginwindow.cpp
         loginwindow.h
+        authmanager.cpp
+        authmanager.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(sec
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        loginwindow.h loginwindow.cpp
-        authmanager.h authmanager.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET sec APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
@@ -72,3 +72,4 @@ install(TARGETS sec
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(sec)
 endif()
+

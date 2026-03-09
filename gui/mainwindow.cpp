@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "calculator.h"
 #include <QLabel>
 #include <QFont>
 
@@ -24,8 +25,8 @@ MainWindow::MainWindow(QWidget *parent)
     // Консоль для вывода
     consoleOutput = new QTextEdit();
     consoleOutput->setReadOnly(true);
-    consoleOutput->setFont(QFont("Courier New", 10));
-    consoleOutput->setMinimumHeight(200);
+    consoleOutput->setFont(QFont("Courier New", 12));
+    consoleOutput->setMinimumHeight(300);
 
     mainLayout->addWidget(titleLabel);
     mainLayout->addWidget(project1Btn);
@@ -64,8 +65,7 @@ QPushButton* MainWindow::createProjectButton(const QString &name, const QString 
                               "QPushButton:hover {"
                               "   background-color: %2;"
                               "}"
-                              ).arg(color).arg(color + "80")); // добавляем прозрачность для hover
-
+                              ).arg(color).arg(color + "80"));
     return button;
 }
 
@@ -75,9 +75,9 @@ void MainWindow::runProject1()
     consoleOutput->append("Запуск Проекта 1...\n");
 
     // Калькулятор больших чисел
-    //QString program = "./project1"; 
+    QString program = "./project1";
 
-    currentProcess->start(program);
+    //currentProcess->start(program);
 }
 
 void MainWindow::runProject2()
@@ -87,7 +87,7 @@ void MainWindow::runProject2()
 
     //QString program = "./project2";     
 
-    currentProcess->start(program);    
+    //currentProcess->start(program);
 }
 
 void MainWindow::runProject3()
@@ -97,7 +97,7 @@ void MainWindow::runProject3()
 
     //QString program = "./project3";     
 
-    currentProcess->start(program);
+    //currentProcess->start(program);
 }
 
 void MainWindow::readProcessOutput()

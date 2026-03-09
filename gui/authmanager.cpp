@@ -2,40 +2,26 @@
 #include <QDebug>
 #include <QRandomGenerator>
 #include <QByteArray>
+#include <QStandardPaths>
 
 
 AuthManager::AuthManager(QObject *parent) : QObject(parent)
 {
     loadUsers();
-
-    if (users.isEmpty()) {
-        // empty
-    }
 }
 
-QByteArray AuthManager::generateSalt(int length)
-{
-    QByteArray salt;
-    salt.resize(length);
-
-    for (int i = 0; i < length; ++i) {
-        salt[i] = static_cast<char>(QRandomGenerator::global()->generate() % 256);
-    }
-
-    return salt;
-}
-
+// Из строки получить хэш
 QString AuthManager::hashPassword(const QString &password)
 {
-    QByteArray salt = generateSalt();
-    QByteArray data = password.toUtf8() + salt;
+    QByteArray data = password.toUtf8();
 
     return QString(QCryptographicHash::hash(data, QCryptographicHash::Sha256).toHex());
 }
 
+// Загрузка пользователей изи .ini файла
 bool AuthManager::loadUsers()
 {
-    QSettings settings(CONFIG_FILE, QSettings::IniFormat);
+    QSettings settings = QSettings(CONFIG_FILE, QSettings::IniFormat);
 
     settings.beginGroup("Users");
     QStringList keys = settings.childKeys();
@@ -48,6 +34,7 @@ bool AuthManager::loadUsers()
     return !users.isEmpty();
 }
 
+// Сохранить пользователей
 bool AuthManager::saveUsers()
 {
     QSettings settings(CONFIG_FILE, QSettings::IniFormat);
@@ -64,6 +51,7 @@ bool AuthManager::saveUsers()
     return true;
 }
 
+// Проверка связки пользователь-пароль
 bool AuthManager::authenticate(const QString &username, const QString &password)
 {
     if (!users.contains(username)) {
@@ -74,27 +62,15 @@ bool AuthManager::authenticate(const QString &username, const QString &password)
     return users[username] == hashedInput;
 }
 
+// Добавить пользователя
 bool AuthManager::addUser(const QString &username, const QString &password)
 {
     if (username.isEmpty() || password.isEmpty() || users.contains(username)) {
         return false;
     }
 
+    qDebug() << hashPassword(password);
+
     users[username] = hashPassword(password);
     return saveUsers();
-}
-
-bool AuthManager::removeUser(const QString &username)
-{
-    if (!users.contains(username)) {
-        return false;
-    }
-
-    users.remove(username);
-    return saveUsers();
-}
-
-QStringList AuthManager::getUsers() const
-{
-    return users.keys();
 }

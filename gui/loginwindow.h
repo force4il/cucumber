@@ -6,6 +6,8 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QVBoxLayout>
+#include <QCheckBox>
+#include "authmanager.h"
 
 class LoginWindow : public QMainWindow
 {
@@ -17,11 +19,16 @@ public:
 
 private slots:
     void handleLogin();
+    void togglePasswordVisibility(bool checked);
 
 private:
     QLineEdit *loginEdit;
     QLineEdit *passwordEdit;
     QPushButton *loginButton;
+    QCheckBox *showPasswordCheck;
+    AuthManager *authManager;
+
+    void setupUI();
 };
 
 #endif
