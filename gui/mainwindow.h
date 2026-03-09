@@ -1,0 +1,31 @@
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
+
+#include <QMainWindow>
+#include <QPushButton>
+#include <QVBoxLayout>
+#include <QProcess>
+#include <QTextEdit>
+
+class MainWindow : public QMainWindow
+{
+    Q_OBJECT
+
+public:
+    MainWindow(QWidget *parent = nullptr);
+    ~MainWindow();
+
+private slots:
+    void runProject1();
+    void runProject2();
+    void runProject3();
+    void readProcessOutput();
+    void processFinished();
+
+private:
+    QProcess *currentProcess;
+    QTextEdit *consoleOutput;
+    QPushButton *createProjectButton(const QString &name, const QString &color);
+};
+
+#endif
