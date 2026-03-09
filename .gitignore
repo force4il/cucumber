@@ -1,5 +1,5 @@
 .DS_Store
 build
 bin
-sec.app
-gui/users.ini
+sec
+users.ini

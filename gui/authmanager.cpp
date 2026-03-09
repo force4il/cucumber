@@ -4,7 +4,6 @@
 #include <QByteArray>
 #include <QStandardPaths>
 
-
 AuthManager::AuthManager(QObject *parent) : QObject(parent)
 {
     loadUsers();
@@ -22,7 +21,7 @@ QString AuthManager::hashPassword(const QString &password)
 bool AuthManager::loadUsers()
 {
     QSettings settings = QSettings(CONFIG_FILE, QSettings::IniFormat);
-
+    
     settings.beginGroup("Users");
     QStringList keys = settings.childKeys();
 

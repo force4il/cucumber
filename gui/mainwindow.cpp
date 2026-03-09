@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
     QPushButton *project3Btn = createProjectButton("Проект 3 - Тест очереди", "#FF9800");
 
     consoleOutput = new QTextEdit();
-    consoleOutput->setReadOnly(false);
+    consoleOutput->setReadOnly(true);
     consoleOutput->setFont(QFont("Courier New", 14));
     consoleOutput->setMinimumHeight(400);
 
@@ -70,7 +70,7 @@ void MainWindow::runProject1()
 {
     consoleOutput->clear();
 
-    QString program = "../bin/calculator";
+    QString program = "./bin/calculator";
     currentProcess->start(program);
 }
 
@@ -78,7 +78,7 @@ void MainWindow::runProject2()
 {
     consoleOutput->clear();
 
-    QString program = "../bin/stack";     
+    QString program = "./bin/stack";     
     currentProcess->start(program);
 }
 
@@ -86,7 +86,7 @@ void MainWindow::runProject3()
 {
     consoleOutput->clear();
 
-    QString program = "../bin/queue";     
+    QString program = "./bin/queue";     
     currentProcess->start(program);
 }
 
