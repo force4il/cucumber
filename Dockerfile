@@ -5,6 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
     build-essential \
     cmake \
+    xterm \
     qt6-base-dev \
     qt6-tools-dev-tools \
     libgl1-mesa-dev \
