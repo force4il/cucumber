@@ -7,5 +7,5 @@ add_executable(queue
     main.cpp)
 
 set_target_properties(queue PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/../../bin"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin"
 )

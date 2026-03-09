@@ -5,5 +5,5 @@ add_executable(calculator
     calculator.c)
 
 set_target_properties(calculator PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/../bin"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin"
 )

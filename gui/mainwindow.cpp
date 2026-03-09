@@ -1,5 +1,4 @@
 #include "mainwindow.h"
-#include "calculator.h"
 #include <QLabel>
 #include <QFont>
 

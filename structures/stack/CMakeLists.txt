@@ -7,5 +7,5 @@ add_executable(stack
     main.cpp)
 
 set_target_properties(stack PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/../../bin"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin"
 )
