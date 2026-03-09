@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include <QLabel>
-#include <QFont>
+#include <QDir>
+#include <QFile>
+#include <QApplication>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -24,19 +26,18 @@ MainWindow::MainWindow(QWidget *parent)
     consoleOutput = new QTextEdit();
     consoleOutput->setReadOnly(true);
     consoleOutput->setFont(QFont("Courier New", 14));
-    consoleOutput->setMinimumHeight(400);
+    consoleOutput->setMinimumHeight(50);
 
     mainLayout->addWidget(titleLabel);
     mainLayout->addWidget(project1Btn);
     mainLayout->addWidget(project2Btn);
     mainLayout->addWidget(project3Btn);
-    mainLayout->addWidget(new QLabel("Вывод консоли:"));
     mainLayout->addWidget(consoleOutput);
 
     connect(project1Btn, &QPushButton::clicked, this, &MainWindow::runProject1);
     connect(project2Btn, &QPushButton::clicked, this, &MainWindow::runProject2);
     connect(project3Btn, &QPushButton::clicked, this, &MainWindow::runProject3);
-
+    
     currentProcess = new QProcess(this);
     connect(currentProcess, &QProcess::readyReadStandardOutput, this, &MainWindow::readProcessOutput);
     connect(currentProcess, &QProcess::readyReadStandardError, this, &MainWindow::readProcessOutput);
@@ -44,7 +45,7 @@ MainWindow::MainWindow(QWidget *parent)
             this, &MainWindow::processFinished);
 
     setWindowTitle("Выбор проекта");
-    resize(500, 400);
+    resize(500, 160);
 }
 
 QPushButton* MainWindow::createProjectButton(const QString &name, const QString &color)
@@ -69,9 +70,23 @@ QPushButton* MainWindow::createProjectButton(const QString &name, const QString 
 void MainWindow::runProject1()
 {
     consoleOutput->clear();
-
+ 
     QString program = "./bin/calculator";
-    currentProcess->start(program);
+
+#ifdef Q_OS_LINUX
+    QStringList args;
+    args << "-e" << program;
+    QProcess::startDetached("xterm", args);  
+#elif defined(Q_OS_MAC)
+    // Для macOS
+    QStringList args;
+    args << "-a" << "Terminal" << program;
+    QProcess::startDetached("open", args);
+#elif defined(Q_OS_WIN)
+    // Для Windows
+    QProcess::startDetached("cmd", QStringList() << "/c" << "start" << program);
+#endif
+    consoleOutput->append("Запуск Проекта 1...\n");    
 }
 
 void MainWindow::runProject2()
@@ -79,7 +94,21 @@ void MainWindow::runProject2()
     consoleOutput->clear();
 
     QString program = "./bin/stack";     
-    currentProcess->start(program);
+
+#ifdef Q_OS_LINUX
+    QStringList args;
+    args << "-e" << program;
+    QProcess::startDetached("xterm", args);  
+#elif defined(Q_OS_MAC)
+    // Для macOS
+    QStringList args;
+    args << "-a" << "Terminal" << program;
+    QProcess::startDetached("open", args);
+#elif defined(Q_OS_WIN)
+    // Для Windows
+    QProcess::startDetached("cmd", QStringList() << "/c" << "start" << program);
+#endif
+    consoleOutput->append("Запуск Проекта 2...\n");        
 }
 
 void MainWindow::runProject3()
@@ -87,7 +116,21 @@ void MainWindow::runProject3()
     consoleOutput->clear();
 
     QString program = "./bin/queue";     
-    currentProcess->start(program);
+
+#ifdef Q_OS_LINUX
+    QStringList args;
+    args << "-e" << program;
+    QProcess::startDetached("xterm", args);  
+#elif defined(Q_OS_MAC)
+    // Для macOS
+    QStringList args;
+    args << "-a" << "Terminal" << program;
+    QProcess::startDetached("open", args);
+#elif defined(Q_OS_WIN)
+    // Для Windows
+    QProcess::startDetached("cmd", QStringList() << "/c" << "start" << program);
+#endif
+    consoleOutput->append("Запуск Проекта 3...\n");        
 }
 
 void MainWindow::readProcessOutput()

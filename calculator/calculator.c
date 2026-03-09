@@ -272,6 +272,8 @@ int main()
 
     printf("Long Integer Calculator\n\n");
     printf("First number: "); scanf("%s", num1);
+    fflush(stdout);
+   
     if (!is_valid_num(num1))
     {
         printf("Error!\n"); return 0;
@@ -287,7 +289,7 @@ int main()
     scanf("%d", &choice);
     if (choice == 5)
     {
-        printf("Exitn"); return 0;
+        printf("Exit\n"); return 0;
     }
 
     char* result = NULL;
@@ -318,4 +320,5 @@ int main()
         printf("\nResult: %s\n", result);
         free(result);
     }
+    fflush(stdout);
 }
