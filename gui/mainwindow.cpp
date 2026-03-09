@@ -17,15 +17,14 @@ MainWindow::MainWindow(QWidget *parent)
     font.setBold(true);
     titleLabel->setFont(font);
 
-    QPushButton *project1Btn = createProjectButton("Проект 1", "#4CAF50");
-    QPushButton *project2Btn = createProjectButton("Проект 2", "#2196F3");
-    QPushButton *project3Btn = createProjectButton("Проект 3", "#FF9800");
+    QPushButton *project1Btn = createProjectButton("Проект 1 - Калькулятор больших чисел", "#4CAF50");
+    QPushButton *project2Btn = createProjectButton("Проект 2 - Тест стека", "#2196F3");
+    QPushButton *project3Btn = createProjectButton("Проект 3 - Тест очереди", "#FF9800");
 
-    // Консоль для вывода
     consoleOutput = new QTextEdit();
-    consoleOutput->setReadOnly(true);
-    consoleOutput->setFont(QFont("Courier New", 12));
-    consoleOutput->setMinimumHeight(300);
+    consoleOutput->setReadOnly(false);
+    consoleOutput->setFont(QFont("Courier New", 14));
+    consoleOutput->setMinimumHeight(400);
 
     mainLayout->addWidget(titleLabel);
     mainLayout->addWidget(project1Btn);
@@ -34,7 +33,6 @@ MainWindow::MainWindow(QWidget *parent)
     mainLayout->addWidget(new QLabel("Вывод консоли:"));
     mainLayout->addWidget(consoleOutput);
 
-    // Подключение сигналов
     connect(project1Btn, &QPushButton::clicked, this, &MainWindow::runProject1);
     connect(project2Btn, &QPushButton::clicked, this, &MainWindow::runProject2);
     connect(project3Btn, &QPushButton::clicked, this, &MainWindow::runProject3);
@@ -71,32 +69,25 @@ QPushButton* MainWindow::createProjectButton(const QString &name, const QString 
 void MainWindow::runProject1()
 {
     consoleOutput->clear();
-    consoleOutput->append("Запуск Проекта 1...\n");
 
-    // Калькулятор больших чисел
-    QString program = "./project1";
-
-    //currentProcess->start(program);
+    QString program = "../bin/calculator";
+    currentProcess->start(program);
 }
 
 void MainWindow::runProject2()
 {
     consoleOutput->clear();
-    consoleOutput->append("Запуск Проекта 2 ...\n");
 
-    //QString program = "./project2";     
-
-    //currentProcess->start(program);
+    QString program = "../bin/stack";     
+    currentProcess->start(program);
 }
 
 void MainWindow::runProject3()
 {
     consoleOutput->clear();
-    consoleOutput->append("Запуск Проекта 3 ...\n");
 
-    //QString program = "./project3";     
-
-    //currentProcess->start(program);
+    QString program = "../bin/queue";     
+    currentProcess->start(program);
 }
 
 void MainWindow::readProcessOutput()
