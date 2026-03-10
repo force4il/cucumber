@@ -1,4 +1,5 @@
 #include "../test.h"
+#include <cstdio>
 
 using std::cout;
 using std::cin;
@@ -17,5 +18,7 @@ int main() {
 
     cout << "Time to delete " << N << " elements for an array-based queue: " << array_timing_pop(N, qa) << '\n';  
     cout << "Time to delete " << N << " elements for an list-based queue: " << list_timing_pop(N, ql) << '\n';      
+
+    getchar();
 }        
 

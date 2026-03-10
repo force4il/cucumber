@@ -318,4 +318,6 @@ int main()
         printf("\nResult: %s\n", result);
         free(result);
     }
+
+    getchar();
 }
