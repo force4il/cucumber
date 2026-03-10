@@ -1,31 +1,18 @@
-FROM ubuntu:22.04
+FROM alpine:latest
 
-ENV DEBIAN_FRONTEND=noninteractive
+ENV DISPLAY=:0
 
-RUN apt-get update && apt-get install -y \
-    build-essential \
+RUN apk update && apk add --no-cache \
     cmake \
+    g++ \
+    qt6-qtbase-dev \
+    qt6-qttools-dev \
     xterm \
-    qt6-base-dev \
-    qt6-tools-dev-tools \
-    libgl1-mesa-dev \
-    libglu1-mesa-dev \
-    libxkbcommon-x11-dev \
-    libxcb-icccm4-dev \
-    libxcb-image0-dev \
-    libxcb-keysyms1-dev \
-    libxcb-randr0-dev \
-    libxcb-render-util0-dev \
-    libxcb-shape0-dev \
-    libxcb-sync-dev \
-    libxcb-util-dev \
-    libxcb-xfixes0-dev \
-    libxcb-xinerama0-dev \
-    libxcb-xkb-dev \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/cache/apk/*
 
-WORKDIR /app
+WORKDIR /workspace
 
 COPY . .
 
 CMD ["./sec"]
+
