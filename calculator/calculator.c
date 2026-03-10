@@ -321,4 +321,5 @@ int main()
         free(result);
     }
     fflush(stdout);
+    getchar();
 }

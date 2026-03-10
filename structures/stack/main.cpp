@@ -18,6 +18,8 @@ int main() {
 
     cout << "Time to delete " << N << " elements for an array-based stack: " << array_timing_pop(N, sa) << '\n';  
     cout << "Time to delete " << N << " elements for an list-based stack: " << list_timing_pop(N, sl) << '\n';      
+
+    getchar();
 }        
 
 
