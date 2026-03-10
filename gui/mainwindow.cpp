@@ -97,7 +97,7 @@ void MainWindow::runProject2()
 
 #ifdef Q_OS_LINUX
     QStringList args;
-    args << "-e" << program;
+    args << "-e -c" << program;
     QProcess::startDetached("xterm", args);  
 #elif defined(Q_OS_MAC)
     // Для macOS
