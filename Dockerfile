@@ -12,7 +12,8 @@ RUN apk add --no-cache \
     libxext-dev \
     libxrender-dev \
     mesa-dev \
-    xcb-util-cursor
+    xcb-util-cursor \
+    xterm
 
 WORKDIR /app
 
