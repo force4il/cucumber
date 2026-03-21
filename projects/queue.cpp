@@ -49,58 +49,49 @@ private:
 
 class QueueList {
 public:
-    QueueList() : cnt{0} {
+    QueueList(): cnt{0} {
         head = tail = nullptr;
     }
-    ~QueueList();
 
-    void push(node* nd);
-    node* pop();
-    void show();
+    ~QueueList() {
+        while (head != nullptr) {
+            this->pop();
+        }
+    }
+
+    void push(node *nd) {
+        if (tail == nullptr) head = nd;
+        else tail->next = nd;
+        tail = nd;
+        cnt++;
+    }
+
+    node* pop() {
+        if (head == nullptr) return head;
+        node *tmp = head;
+        head = head->next;
+        cnt--;
+        return tmp;
+    }
+
+    void show() {
+        if (head == nullptr) {
+            std::cout << "Empty";
+            return;
+        }
+        node cur = *head;
+        int i = 0;
+        while (i++ != cnt) {
+            std::cout << cur.data << ' ';
+            if (cur.next != nullptr) cur = *cur.next;
+        }
+        std::cout << '\n';
+    }
 
 private:
     node *head, *tail;
     int cnt;
 };
-
-QueueList::QueueList() : cnt{0} {
-    head = tail = nullptr;
-}
-
-QueueList::~QueueList() {
-    while (head != nullptr)
-        this->pop();
-}
-
-void QueueList::push(node *nd) {
-    if (tail == nullptr) head = nd;
-    else tail->next = nd;
-    tail = nd;
-    cnt++;
-}
-
-node *QueueList::pop() {
-    if (head == nullptr) return head;
-    node *tmp = head;
-    head = head->next;
-    cnt--;
-    return tmp;
-}
-
-void QueueList::show() {
-    if (head == nullptr) {
-        std::cout << "Empty";
-        return;
-    }
-    node cur = *head;
-    int i = 0;
-    while (i++ != cnt) {
-        std::cout << cur.data << ' ';
-        if (cur.next != nullptr) cur = *cur.next;
-    }
-    std::cout << '\n';
-}
-
 
 int main() {
     int N;

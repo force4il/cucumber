@@ -3,3 +3,5 @@ build
 bin
 sec
 users.ini
+DOCKER.MD
+.idea
