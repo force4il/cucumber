@@ -1,18 +1,22 @@
-FROM alpine:latest
+FROM alpine:3.19
 
 ENV DISPLAY=:0
 
-RUN apk update && apk add --no-cache \
+RUN apk add --no-cache \
+    fontconfig \
+    ttf-dejavu \
+    build-base \
     cmake \
-    g++ \
     qt6-qtbase-dev \
-    qt6-qttools-dev \
-    xterm \
-    && rm -rf /var/cache/apk/*
+    libx11-dev \
+    libxext-dev \
+    libxrender-dev \
+    mesa-dev \
+    xcb-util-cursor
 
-WORKDIR /workspace
+WORKDIR /app
 
 COPY . .
 
-CMD ["./sec"]
+CMD cmake -B build -S . && cmake --build build && ./sec
 
