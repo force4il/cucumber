@@ -1,4 +1,5 @@
 #include <iostream>
+#include <random>
 #include "test.h"
 #include "node.h"
 
@@ -86,10 +87,16 @@ private:
 };
 
 int main() {
-    int N;
-    cout << "Speed test for inserting and deleting elements in a stack\n";
-    cout << "Enter the number of elements: ";
-    cin >> N;
+	constexpr int MX_N = 1e7;
+
+	std::random_device rd;
+	std::mt19937_64 gen(rd());
+	std::uniform_int_distribution<int> dist(0, MX_N);
+
+	int N = dist(gen);
+
+	cout << "Stack performance comparison\n";
+	cout << "Number of elements: " << N << '\n';
 
     StackArray sa(N);
     StackList sl;
