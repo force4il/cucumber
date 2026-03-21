@@ -1,4 +1,6 @@
-#pragma once 
+/* Модуль для работы с односвязным списком. */
+
+#pragma once
 
 struct node {
     node(int data): data{data}, next{nullptr} {}

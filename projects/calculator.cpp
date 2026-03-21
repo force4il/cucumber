@@ -271,48 +271,38 @@ int is_valid_num(const char* num)
     return 1;
 }
 
-std::string generate_random_string(size_t length) {
-    const std::string characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(0, characters.size() - 1);
-
-    std::string result;
-    for (size_t i = 0; i < length; ++i) {
-        result += characters[dis(gen)];
-    }
-    return result;
-}
 int main() {
+    // Генератор случайных чисел для создания больших чисел
     std::random_device rd;
     std::mt19937_64 gen(rd());
-    uint64_t big_num = gen();
+
+    // Генерация двух больших чисел
     uint64_t big_num1 = gen();
-    unsigned char* bytes = reinterpret_cast<unsigned char*>(&big_num);
-    unsigned char* bytes1 = reinterpret_cast<unsigned char*>(&big_num1);
-    
-    // Способ 2: Строковое представление числа (например, "18446...")
-    std::string s = std::to_string(big_num);
-    const char* char_ptr = s.c_str();
+    uint64_t big_num2 = gen();
+
+    // Преобразование больших чисел в строки для дальнейших операций
     std::string s1 = std::to_string(big_num1);
-    const char* char_ptr1 = s1.c_str();
-    int choice;
+    std::string s2 = std::to_string(big_num2);
 
+    // Получение "сырых" строк для передачи в функции, работающие с C-строками
+    const char* raw_s1 = s1.c_str();
+    const char* raw_s2 = s2.c_str();
+    
     printf("Long Integer Calculator\n\n");
-    std::cout << "First number" << s << std::endl; 
-    fflush(stdout);
-   
-    if (!is_valid_num(char_ptr))
+    std::cout << "First number: " << raw_s1 << std::endl;
+
+    if (!is_valid_num(raw_s1))
     {
         printf("Error!\n"); return 0;
     }
 
-    cout << "Second number" << s1 << endl;
-    if (!is_valid_num(char_ptr1))
+    cout << "Second number: " << raw_s2 << endl;
+    if (!is_valid_num(s2.c_str()))
     {
         printf("Error!\n"); return 0;
     }
 
+    int choice;
     printf("\n1. Addition\n2. Subtraction\n3. Multiplication\n4. Division\n5. Exit\nChoice: ");
     scanf("%d", &choice);
     if (choice == 5)
@@ -323,14 +313,14 @@ int main() {
     char* result = NULL;
     switch (choice)
     {
-    case 1: result = add_with_sign(char_ptr, char_ptr1); break;
-    case 2: result = subtract_with_sign(char_ptr, char_ptr1); break;
-    case 3: result = multiply_with_sign(char_ptr, char_ptr1); break;
+    case 1: result = add_with_sign(raw_s1, raw_s2); break;
+    case 2: result = subtract_with_sign(raw_s1, raw_s2); break;
+    case 3: result = multiply_with_sign(raw_s1, raw_s2); break;
     case 4:
     {
-        int is_first_negative = char_ptr[0] == '-';
-        int is_second_negative = char_ptr1[0] == '-';
-        result = divide_strings(is_first_negative ? char_ptr + 1 : char_ptr, is_second_negative ? char_ptr1 + 1 : char_ptr1);
+        int is_first_negative = raw_s1[0] == '-';
+        int is_second_negative = raw_s2[0] == '-';
+        result = divide_strings(is_first_negative ? raw_s1 + 1 : raw_s1, is_second_negative ? raw_s2 + 1 : raw_s2);
         if (result && (is_first_negative != is_second_negative) && strcmp(result, "0") != 0)
         {
             char* negative_res = (char*)malloc(strlen(result) + 2);
@@ -348,6 +338,4 @@ int main() {
         printf("\nResult: %s\n", result);
         free(result);
     }
-    fflush(stdout);
-    getchar();
 }

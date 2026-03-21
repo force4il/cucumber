@@ -5,3 +5,13 @@ sec
 users.ini
 DOCKER.MD
 .idea
+.cmake/
+.qt/
+CMakeCache.txt
+CMakeFiles/
+build.ninja
+cmake_install.cmake
+compile_commands.json
+gui/CMakeFiles/
+gui/cmake_install.cmake
+projects/cmake_install.cmake
