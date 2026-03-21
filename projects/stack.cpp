@@ -1,12 +1,13 @@
 #include <iostream>
-#include "../node.h"
+#include "test.h"
+#include "node.h"
 
 using std::cout;
 using std::cin;
 
 class StackArray {
 public:
-    StackArray(int cap = 1) cap{cap}, tail{-1} {
+    StackArray(int cap = 1): cap{cap}, tail{-1} {
     	array = new int[cap];
 	}
 
@@ -14,13 +15,13 @@ public:
     	delete [] array;
 	}
 
-    int push(int data = nullptr) {
+    int push(int data) {
     	if (tail + 1 >= cap) return 1;
     	array[++tail] = data;
     	return 0;
 	}
 
-	int pop(int *dest) {
+	int pop(int *dest = nullptr) {
     	if (tail == -1) return 1;
     	if (dest) *dest = array[tail];
     	tail--;

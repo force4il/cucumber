@@ -1,9 +1,13 @@
 #include <iostream>
-#include "../node.h"
+#include "test.h"
+#include "node.h"
+
+using std::cin;
+using std::cout;
 
 class QueueArray {
 public:
-    QueueArray(int cap, int size):
+    QueueArray(int cap = 0, int size = 0):
         cap{cap}, head{0}, tail{0}, size{0} {
         array = new int[cap];
     }
@@ -45,7 +49,6 @@ private:
     int* array;
     int cap, size, tail, head;
 };
-
 
 class QueueList {
 public:
@@ -107,6 +110,4 @@ int main() {
 
     cout << "Time to delete " << N << " elements for an array-based queue: " << array_timing_pop(N, qa) << '\n';
     cout << "Time to delete " << N << " elements for an list-based queue: " << list_timing_pop(N, ql) << '\n';
-
-    getchar();
 }

@@ -1,7 +1,6 @@
 #pragma once
-#include "queue/queue.h"
-#include "stack/stack.h"
 #include <chrono>
+#include "node.h"
 
 using std::chrono::high_resolution_clock;
 using std::chrono::time_point;
