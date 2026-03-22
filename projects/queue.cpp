@@ -106,7 +106,7 @@ int main() {
 
     int N = dist(gen);
 
-    cout << "Queue performance test\n";
+    cout << "Queue performance test:\n\n";
     cout << "Number of elements: " << N << '\n';
 
     QueueArray qa(N);

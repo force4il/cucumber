@@ -95,7 +95,7 @@ int main() {
 
 	int N = dist(gen);
 
-	cout << "Stack performance comparison\n";
+	cout << "Queue performance test:\n\n";
 	cout << "Number of elements: " << N << '\n';
 
     StackArray sa(N);

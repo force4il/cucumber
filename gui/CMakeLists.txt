@@ -19,7 +19,6 @@ set(PROJECT_SOURCES
         mainwindow.ui
         loginwindow.cpp
         loginwindow.h
-        authmanager.cpp
         authmanager.h
 )
 
@@ -46,7 +45,7 @@ if(${QT_VERSION} VERSION_LESS 6.1.0)
   set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.sec)
 endif()
 set_target_properties(sec PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}"
 )
 
 include(GNUInstallDirs)

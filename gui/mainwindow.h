@@ -13,19 +13,22 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    ~MainWindow() = default;
 
 private slots:
     void runProject1();
     void runProject2();
     void runProject3();
-    void readProcessOutput();
-    void processFinished();
 
 private:
-    QProcess *currentProcess;
-    QTextEdit *consoleOutput;
     QPushButton *createProjectButton(const QString &name, const QString &color);
+
+    // Пути к исполняемым файлам проектов
+    QVector<QString> projects = {
+        "./bin/calculator",
+        "./bin/stack",
+        "./bin/queue"
+    };
 };
 
 #endif

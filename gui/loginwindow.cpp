@@ -4,19 +4,19 @@
 #include <QTime>
 #include <QDebug>
 
+// Получение времени для дебагера
 QString get_time() {
     return QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss");
 }
 
-LoginWindow::LoginWindow(QWidget *parent)
-    : QMainWindow(parent)
-{
+// Конструктор окна входа
+LoginWindow::LoginWindow(QWidget *parent): QMainWindow(parent) {
     authManager = new AuthManager(this);
     setupUI();
 }
 
-void LoginWindow::setupUI()
-{
+// Настройка интерфейса окна входа
+void LoginWindow::setupUI() {
     QWidget *centralWidget = new QWidget(this);
     setCentralWidget(centralWidget);
 
@@ -32,13 +32,14 @@ void LoginWindow::setupUI()
     titleLabel->setFont(titleFont);
     titleLabel->setAlignment(Qt::AlignCenter);
 
-    // Поля ввода
+    // Поля ввода логина
     loginEdit = new QLineEdit();
     loginEdit->setPlaceholderText("Логин");
     loginEdit->setMinimumHeight(30);
 
+    // Поля ввода пароля
     passwordEdit = new QLineEdit();
-   passwordEdit->setPlaceholderText("Пароль");
+    passwordEdit->setPlaceholderText("Пароль");
     passwordEdit->setEchoMode(QLineEdit::Password);
     passwordEdit->setMinimumHeight(30);
 
@@ -78,6 +79,7 @@ void LoginWindow::setupUI()
     loginEdit->setFocus();
 }
 
+// Слот для переключения видимости пароля
 void LoginWindow::togglePasswordVisibility(bool checked)
 {
     if (checked) {
@@ -87,14 +89,16 @@ void LoginWindow::togglePasswordVisibility(bool checked)
     }
 }
 
+// Слот для обработки попытки входа
 void LoginWindow::handleLogin()
 {
     QString username = loginEdit->text().trimmed();
     QString password = passwordEdit->text();
 
     if (username.isEmpty() || password.isEmpty()) {
-        QMessageBox::warning(this, "Ошибка", "Введите логин и пароль");
         qDebug() << "Неудачная попытка входа" << get_time();
+
+        QMessageBox::warning(this, "Ошибка", "Введите логин и пароль");
         return;
     }
 
@@ -105,12 +109,10 @@ void LoginWindow::handleLogin()
         mainWindow->show();
         this->close();
     } else {
+        qDebug() << "Неудачная попытка входа для пользователя:" << username  << get_time();
+
         QMessageBox::warning(this, "Ошибка", "Неверный логин или пароль");
         passwordEdit->clear();
         passwordEdit->setFocus();
-
-        qDebug() << "Неудачная попытка входа для пользователя:" << username  << get_time();
     }
 }
-
-LoginWindow::~LoginWindow() {}

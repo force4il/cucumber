@@ -19,5 +19,4 @@ WORKDIR /app
 
 COPY . .
 
-CMD cmake -B build -S . && cmake --build build && ./sec
-
+CMD cmake -B build -S . && cmake --build build

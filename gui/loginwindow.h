@@ -5,7 +5,6 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QLabel>
-#include <QVBoxLayout>
 #include <QCheckBox>
 #include "authmanager.h"
 
@@ -15,7 +14,7 @@ class LoginWindow : public QMainWindow
 
 public:
     LoginWindow(QWidget *parent = nullptr);
-    ~LoginWindow();
+    ~LoginWindow() = default;
 
 private slots:
     void handleLogin();
@@ -32,3 +31,4 @@ private:
 };
 
 #endif
+
